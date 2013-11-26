@@ -1,0 +1,107 @@
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools" 
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+	    
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical">
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textStyle="bold"
+			android:text="Nama Ibu"/>
+		<TextView 
+		    android:id="@+id/nama_ibu"
+		    style="?android:attr/textAppearanceLarge"
+		    android:textIsSelectable="true"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".KematianDetailFragment" />
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="Tanggal Kemtian"/>
+		<TextView 
+		    android:id="@+id/tanggal_kematian"
+		    style="?android:attr/textAppearanceLarge"
+		    android:textIsSelectable="true"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".KematianDetailFragment" />
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="No Ktp"/>
+		<TextView 
+		    android:id="@+id/noKtp"
+		    style="?android:attr/textAppearanceLarge"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+		    android:textSize="15sp"
+		    android:textIsSelectable="true"
+		    tools:context=".KematianDetailFragment" />
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="Umur"/>
+		<TextView 
+		    android:id="@+id/umur"
+		    style="?android:attr/textAppearanceLarge"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+		    android:textSize="15sp"
+		    android:textIsSelectable="true"
+		    tools:context=".KematianDetailFragment" />
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="Kehamilan"/>
+		<TextView 
+		    android:id="@+id/kehamilan"
+		    style="?android:attr/textAppearanceLarge"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+		    android:textSize="15sp"
+		    android:textIsSelectable="true"
+		    tools:context=".KematianDetailFragment" />
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="Faktor Kematian"/>
+		<TextView 
+		    android:id="@+id/kematian_detail"
+		    style="?android:attr/textAppearanceLarge"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+		    android:textSize="15sp"
+		    android:textIsSelectable="true"
+		    tools:context=".KematianDetailFragment" />
+		<TextView 
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="Tempat Kematian"/>
+		<TextView 
+		    android:id="@+id/tempat_kematian"
+		    style="?android:attr/textAppearanceLarge"
+		    android:textSize="15sp"
+		    android:layout_width="match_parent"
+			android:layout_height="match_parent"
+		    android:textIsSelectable="true"
+		    tools:context=".KematianDetailFragment" />
+	</LinearLayout>
+</ScrollView>	

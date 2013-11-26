@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SIMaternal</string>
+    <string name="title_kematian_detail">Kematian Detail</string>
+    <string name="title_activity_kematian">KematianActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string-array name="tempat_kematian">
+	    <item>Rumah Sakit</item>
+	    <item>Rumah Sendiri/keluarga</item>
+	    <item>Rumah Dukun</item>
+	    <item>Perjalanan ke fasilitas</item>
+	    <item>Pustu</item>
+	    <item>Puskesmas</item>
+	    <item>Polindes</item>
+	    <item>Rumah bidan</item>
+	    <item>Lainya</item>	    
+	</string-array>
+</resources>
