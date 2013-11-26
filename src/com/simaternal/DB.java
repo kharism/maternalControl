@@ -25,6 +25,10 @@ public class DB {
 	    database = dbHelper.getWritableDatabase();
 	}
 	public long save(String tableName,ContentValues values){
+		if(values.containsKey("id")){
+			database.update(tableName, values, "id="+values.getAsString("id"), null);
+			return (long)values.getAsInteger("id");
+		}			
 		return database.insert(tableName, null, values);
 	}
 	public void saveKematian(Kematian i){

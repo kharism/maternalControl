@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -39,17 +40,46 @@ public class KematianDetailActivity extends FragmentActivity {
 			// Create the detail fragment and add it to the activity
 			// using a fragment transaction.
 			Bundle arguments = new Bundle();
-			Toast.makeText(getApplicationContext(), getIntent()
-					.getStringExtra(KematianDetailFragment.ARG_ITEM_ID), Toast.LENGTH_SHORT).show();
 			arguments.putString(KematianDetailFragment.ARG_ITEM_ID, getIntent()
 					.getStringExtra(KematianDetailFragment.ARG_ITEM_ID));
 			KematianDetailFragment fragment = new KematianDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.kematian_detail_container, fragment).commit();
+			Toast.makeText(getApplicationContext(), "mulai gan", Toast.LENGTH_SHORT);
+			
 		}
 	}
-
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+	@Override
+	protected void onRestart() {
+		Toast.makeText(getApplicationContext(), "lanjut gan", Toast.LENGTH_SHORT);
+		super.onRestart();
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.kematian_detil_menu, menu);
+		return true;
+	}
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.edit_kematian:
+			Intent edit = new Intent(getApplicationContext(), KematianActivity.class);
+			String h = getIntent()
+					.getStringExtra(KematianDetailFragment.ARG_ITEM_ID);
+			edit.putExtra(KematianDetailFragment.ARG_ITEM_ID,h );
+			startActivity(edit);
+			return true;
+		default:
+			return true;
+		}
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

@@ -2,6 +2,7 @@ package com.simaternal;
 
 import com.simaternal.model.Kematian;
 
+import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -37,12 +38,33 @@ public class KematianActivity extends Activity {
 		editSebab = (EditText)findViewById(R.id.editSebab);
 		saveButton = (Button)findViewById(R.id.saveButton);
 		database = new DB(getApplicationContext());
+		if(getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
+			String j =getIntent().getExtras().getString(KematianDetailFragment.ARG_ITEM_ID);
+			Kematian g = database.findKematian(Integer.parseInt(j));
+			editTanggal.setText(g.getTanggal());
+			editNama.setText(g.getNamaIbu());
+			editKasus.setText(g.getNoKasus());
+			editSebab.setText(g.getSebab());
+			editKehamilan.setText(String.valueOf(g.getHamilKe()));
+			editUmur.setText(String.valueOf(g.getUmur()));
+			editKtp.setText(g.getNoKtp());
+			String[] data = getResources().getStringArray(R.array.tempat_kematian);
+			int i;
+			for(i=0;i<data.length;i++){
+				if(data[i].equals(g.getTempatMeninggal()))
+					break;
+			}
+			spinnerTempat.setSelection(i);
+		}
 		saveButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Kematian k = new Kematian();
+				if(getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
+					k.setId(Integer.parseInt(getIntent().getStringExtra(KematianDetailFragment.ARG_ITEM_ID)));
+				}
 				k.setTanggal(editTanggal.getText().toString());
 				k.setNoKtp(editKtp.getText().toString());
 				k.setNamaIbu(editNama.getText().toString());
@@ -53,6 +75,7 @@ public class KematianActivity extends Activity {
 				k.setSebab(String.valueOf(editSebab.getText().toString()));
 				k.setNoKasus(editKasus.getText().toString());
 				database.saveKematian(k);
+				finish();
 			}
 		});
 	}

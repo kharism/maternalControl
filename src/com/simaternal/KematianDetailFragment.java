@@ -48,7 +48,7 @@ public class KematianDetailFragment extends Fragment {
 					ARG_ITEM_ID)));
 		}
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
