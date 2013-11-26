@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/edit_kematian" android:title="Edit"></item>
-    
-
+    <item android:id="@+id/kirim_sms" android:title="Kirim SMS"></item>
+	<item android:id="@+id/kirim_json" android:title="Kirim Internet"></item>
 </menu>

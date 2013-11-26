@@ -1,9 +1,12 @@
 package com.simaternal;
 
+import com.simaternal.model.Kematian;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,12 +21,12 @@ import android.widget.Toast;
  * a {@link KematianDetailFragment}.
  */
 public class KematianDetailActivity extends FragmentActivity {
-
+	DB database;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kematian_detail);
-
+		database = new DB(getApplicationContext());
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -75,6 +78,14 @@ public class KematianDetailActivity extends FragmentActivity {
 					.getStringExtra(KematianDetailFragment.ARG_ITEM_ID);
 			edit.putExtra(KematianDetailFragment.ARG_ITEM_ID,h );
 			startActivity(edit);
+			return true;
+		case R.id.kirim_sms:
+			Kematian k = database.findKematian(Integer.parseInt(getIntent()
+					.getStringExtra(KematianDetailFragment.ARG_ITEM_ID)));
+			SmsManager.getDefault().sendTextMessage("085646201002", null, k.toSMS(),null, null);
+			Toast.makeText(getApplicationContext(), "SMS sukses terkirim", Toast.LENGTH_SHORT).show();
+			return true;
+		case R.id.kirim_json:
 			return true;
 		default:
 			return true;
