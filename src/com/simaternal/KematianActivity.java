@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class KematianActivity extends Activity {
 
@@ -74,8 +75,14 @@ public class KematianActivity extends Activity {
 				k.setTempatMeninggal(String.valueOf(spinnerTempat.getSelectedItem()));
 				k.setSebab(String.valueOf(editSebab.getText().toString()));
 				k.setNoKasus(editKasus.getText().toString());
-				database.saveKematian(k);
-				finish();
+				if(k.validate()){
+					database.saveKematian(k);
+					finish();
+				}
+				else
+				{
+					Toast.makeText(getApplicationContext(), "format data salah", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 	}

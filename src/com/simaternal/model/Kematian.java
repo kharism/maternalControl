@@ -1,5 +1,9 @@
 package com.simaternal.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.database.Cursor;
 
 
@@ -102,5 +106,22 @@ public class Kematian {
 		n.id = c.getInt(0);
 		n.fromSmsString(c.getString(1));
 		return n;
+	}
+	public boolean validate(){
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		f.setLenient(false);
+		try {
+			 
+			//if not valid, it will throw ParseException
+			Date date = f.parse(tanggal);
+			System.out.println(date);
+ 
+		} catch (ParseException e) {
+ 
+			e.printStackTrace();
+			return false;
+		}
+ 
+		return true;
 	}
 }
