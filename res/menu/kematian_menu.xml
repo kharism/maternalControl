@@ -5,4 +5,10 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="Tambah data"/>
+    <item
+        android:id="@+id/actionEditData"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:visible="false"
+        android:title="edit data"/>
 </menu>

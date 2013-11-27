@@ -31,7 +31,8 @@ public class KematianListActivity extends FragmentActivity implements
 	 * device.
 	 */
 	private boolean mTwoPane;
-
+	private Menu menu;
+	private String selectedId;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class KematianListActivity extends FragmentActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.kematian_menu, menu);
+		this.menu = menu;
 		return true;
 	}
 	
@@ -68,7 +70,11 @@ public class KematianListActivity extends FragmentActivity implements
 			Intent i = new Intent(getApplicationContext(), KematianActivity.class);
 			startActivity(i);
 			return true;
-
+		case R.id.actionEditData:
+			Intent j = new Intent(getApplicationContext(), KematianActivity.class);
+			j.putExtra(KematianDetailFragment.ARG_ITEM_ID, selectedId);
+			startActivity(j);
+			return true;
 		default:
 			break;
 		}
@@ -85,6 +91,8 @@ public class KematianListActivity extends FragmentActivity implements
 			// In two-pane mode, show the detail view in this activity by
 			// adding or replacing the detail fragment using a
 			// fragment transaction.
+			menu.findItem(R.id.actionEditData).setVisible(true);
+			selectedId = id;
 			Bundle arguments = new Bundle();
 			arguments.putString(KematianDetailFragment.ARG_ITEM_ID, id);
 			KematianDetailFragment fragment = new KematianDetailFragment();

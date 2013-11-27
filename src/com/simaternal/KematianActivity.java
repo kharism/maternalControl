@@ -39,7 +39,7 @@ public class KematianActivity extends Activity {
 		editSebab = (EditText)findViewById(R.id.editSebab);
 		saveButton = (Button)findViewById(R.id.saveButton);
 		database = new DB(getApplicationContext());
-		if(getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
+		if(getIntent().getExtras()!=null && getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
 			String j =getIntent().getExtras().getString(KematianDetailFragment.ARG_ITEM_ID);
 			Kematian g = database.findKematian(Integer.parseInt(j));
 			editTanggal.setText(g.getTanggal());
@@ -63,7 +63,7 @@ public class KematianActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Kematian k = new Kematian();
-				if(getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
+				if(getIntent().getExtras()!=null && getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
 					k.setId(Integer.parseInt(getIntent().getStringExtra(KematianDetailFragment.ARG_ITEM_ID)));
 				}
 				k.setTanggal(editTanggal.getText().toString());
