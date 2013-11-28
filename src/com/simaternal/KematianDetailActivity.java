@@ -109,6 +109,9 @@ public class KematianDetailActivity extends FragmentActivity {
 	public class LoginTask extends AsyncTask<Void, Void, Void>{
 		String result;
 		boolean isLogedIn;
+		public LoginTask(){
+			
+		}
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub

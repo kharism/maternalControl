@@ -11,4 +11,16 @@
         android:showAsAction="never"
         android:visible="false"
         android:title="edit data"/>
+    <item
+        android:id="@+id/actionKirimSMS"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:visible="false"
+        android:title="Kirim SMS"/>
+	<item
+        android:id="@+id/actionKirimInternet"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:visible="false"
+        android:title="Kirim Internet"/>
 </menu>
