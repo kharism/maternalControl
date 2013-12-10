@@ -62,15 +62,21 @@ public class KematianDetailActivity extends FragmentActivity {
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.kematian_detail_container, fragment).commit();
-			Toast.makeText(getApplicationContext(), "mulai gan", Toast.LENGTH_SHORT);
+			//Toast.makeText(getApplicationContext(), "mulai gan", Toast.LENGTH_SHORT);
 			
 		}
 	}
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
+		Bundle arguments = new Bundle();
+		arguments.putString(KematianDetailFragment.ARG_ITEM_ID, getIntent()
+				.getStringExtra(KematianDetailFragment.ARG_ITEM_ID));
+		KematianDetailFragment fragment = new KematianDetailFragment();
+		fragment.setArguments(arguments);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.kematian_detail_container, fragment).commit();
 	}
 	@Override
 	protected void onRestart() {

@@ -50,6 +50,7 @@ public class KematianListActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kematian_list);
 		database = new DB(getApplicationContext());
+		
 		if (findViewById(R.id.kematian_detail_container) != null) {
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-large and
@@ -63,10 +64,15 @@ public class KematianListActivity extends FragmentActivity implements
 					.findFragmentById(R.id.kematian_list))
 					.setActivateOnItemClick(true);
 		}
-
-		// TODO: If exposing deep links into your app, handle intents here.
 	}
-	
+	@Override
+	protected void onResume() {
+		
+		KematianListFragment hh = ((KematianListFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.kematian_list));
+			hh.reloadList();
+		super.onResume();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.kematian_menu, menu);

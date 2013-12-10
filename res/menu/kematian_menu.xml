@@ -3,7 +3,7 @@
     <item
         android:id="@+id/actionTambahData"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        android:showAsAction="always"
         android:title="Tambah data"/>
     <item
         android:id="@+id/actionEditData"

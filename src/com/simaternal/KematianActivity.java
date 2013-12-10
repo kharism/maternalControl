@@ -1,21 +1,27 @@
 package com.simaternal;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import com.simaternal.model.Kematian;
 
 import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 public class KematianActivity extends Activity {
 
-	EditText editTanggal;
+	DatePicker editTanggal;
 	EditText editKtp;
 	EditText editNama;
 	EditText editUmur;
@@ -25,11 +31,26 @@ public class KematianActivity extends Activity {
 	EditText editSebab;
 	Button saveButton;
 	DB database;
+	
+	private int year;
+	private int month;
+	private int day;
+	private class dateChangeListener implements OnDateChangedListener{
+
+		@Override
+		public void onDateChanged(DatePicker view, int syear, int smonth, int sdate) {
+			year = syear;
+			month = smonth;
+			day = sdate;
+		}
+		
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kematian);
-		editTanggal = (EditText)findViewById(R.id.editTanggal);
+		editTanggal = (DatePicker)findViewById(R.id.datePickerKematian);
 		editKtp = (EditText)findViewById(R.id.editKTP);
 		editNama = (EditText)findViewById(R.id.editNamaIbu);
 		editUmur = (EditText)findViewById(R.id.editUmurIbu);
@@ -39,10 +60,18 @@ public class KematianActivity extends Activity {
 		editSebab = (EditText)findViewById(R.id.editSebab);
 		saveButton = (Button)findViewById(R.id.saveButton);
 		database = new DB(getApplicationContext());
+		Date date = new Date(System.currentTimeMillis());
+		year = Calendar.getInstance().get(Calendar.YEAR);
+		month = Calendar.getInstance().get(Calendar.MONTH);;
+		day = Calendar.getInstance().get(Calendar.DATE);
+		editTanggal.init(year, month-1, day, new dateChangeListener());
 		if(getIntent().getExtras()!=null && getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
 			String j =getIntent().getExtras().getString(KematianDetailFragment.ARG_ITEM_ID);
 			Kematian g = database.findKematian(Integer.parseInt(j));
-			editTanggal.setText(g.getTanggal());
+			Log.i("tanggal",g.getTanggal());
+			String[] kk = g.getTanggal().split("-");
+			date = new Date(Integer.parseInt(kk[0]),Integer.parseInt(kk[1])-1,Integer.parseInt(kk[2]));
+			editTanggal.init(date.getYear(), date.getMonth(), date.getDate(), new dateChangeListener());
 			editNama.setText(g.getNamaIbu());
 			editKasus.setText(g.getNoKasus());
 			editSebab.setText(g.getSebab());
@@ -66,7 +95,7 @@ public class KematianActivity extends Activity {
 				if(getIntent().getExtras()!=null && getIntent().getExtras().containsKey(KematianDetailFragment.ARG_ITEM_ID)){
 					k.setId(Integer.parseInt(getIntent().getStringExtra(KematianDetailFragment.ARG_ITEM_ID)));
 				}
-				k.setTanggal(editTanggal.getText().toString());
+				k.setTanggal(year+"-"+month+"-"+day);
 				k.setNoKtp(editKtp.getText().toString());
 				k.setNamaIbu(editNama.getText().toString());
 				k.setUmur(Integer.parseInt(editUmur.getText().toString()));

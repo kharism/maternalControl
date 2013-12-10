@@ -101,7 +101,10 @@ public class KematianListFragment extends ListFragment {
 		setListAdapter(kAdapter);
 
 	}
-
+	public void reloadList(){
+		KematianAdapter kAdapter = new KematianAdapter(getActivity(), R.layout.list_kematian, database.findAllKematian());
+		setListAdapter(kAdapter);
+	}
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);

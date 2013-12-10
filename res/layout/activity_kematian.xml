@@ -14,7 +14,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".KematianActivity" 
     android:orientation="vertical">
-	<LinearLayout 	    
+	<LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 	    android:orientation="horizontal">
@@ -24,14 +24,18 @@
 	        android:layout_weight="0.3"
 	        android:layout_height="wrap_content"
 	        android:text="Tanggal" />
-		
-	    <EditText
-	        android:id="@+id/editTanggal"
-	        android:layout_width="wrap_content"
+	</LinearLayout>
+	<LinearLayout 	    
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    
+	    <DatePicker
+	        android:id="@+id/datePickerKematian"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="0.7"
-	        android:ems="10"
-	        android:inputType="date" />
+	        android:calendarViewShown="false" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"

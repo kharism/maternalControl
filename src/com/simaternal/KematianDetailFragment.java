@@ -49,6 +49,10 @@ public class KematianDetailFragment extends Fragment {
 		}
 	}
 	
+	public void reloadView(){
+		
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
