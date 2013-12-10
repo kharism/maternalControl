@@ -24,6 +24,9 @@ public class DB {
 	    dbHelper = new DatabaseHelper(context);  
 	    database = dbHelper.getWritableDatabase();
 	}
+	public void onDestroy(){
+		database.close();
+	}
 	public long save(String tableName,ContentValues values){
 		if(values.containsKey("id")){
 			database.update(tableName, values, "id="+values.getAsString("id"), null);

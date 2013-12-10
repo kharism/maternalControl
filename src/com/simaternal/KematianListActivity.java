@@ -4,16 +4,26 @@ package com.simaternal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import com.simaternal.model.Kematian;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
+import android.support.v4.widget.DrawerLayout;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 /**
@@ -44,13 +54,16 @@ public class KematianListActivity extends FragmentActivity implements
 	private String selectedId;
 	private String sessid;
 	private String editToken;
+	private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+
 	DB database;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kematian_list);
 		database = new DB(getApplicationContext());
-		
 		if (findViewById(R.id.kematian_detail_container) != null) {
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-large and
@@ -64,13 +77,78 @@ public class KematianListActivity extends FragmentActivity implements
 					.findFragmentById(R.id.kematian_list))
 					.setActivateOnItemClick(true);
 		}
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        String[] mPlanetTitles = {"menu1","menu lain"};
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mPlanetTitles));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description for accessibility */
+                R.string.drawer_close  /* "close drawer" description for accessibility */
+                ) {
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle("SIMaternal");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle("SIMaternal Menu");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
 	}
 	@Override
+	protected void onDestroy() {
+		database.onDestroy();
+		super.onDestroy();
+	}
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
+    private void selectItem(int position) {
+        // update the main content by replacing fragments
+        if(position ==0){
+        	Fragment fr1 = new KematianListFragment();
+        	getSupportFragmentManager().beginTransaction().replace(R.id.kematian_list, fr1).commit();
+        }
+    	/*Fragment fragment = new PlanetFragment();
+        Bundle args = new Bundle();
+        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+        fragment.setArguments(args);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+        // update selected item and title, then close the drawer
+        mDrawerList.setItemChecked(position, true);
+        setTitle(mPlanetTitles[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);*/
+    	Toast.makeText(getApplicationContext(), "menu "+position, Toast.LENGTH_SHORT).show();
+    }
+	
+	@Override
 	protected void onResume() {
-		
+		try{
 		KematianListFragment hh = ((KematianListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.kematian_list));
-			hh.reloadList();
+			hh.reloadList();}
+		catch(NullPointerException ex){
+			ex.printStackTrace();
+		}
 		super.onResume();
 	}
 	@Override
@@ -80,10 +158,26 @@ public class KematianListActivity extends FragmentActivity implements
 		return true;
 	}
 	
+	/* Called whenever we call invalidateOptionsMenu() */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }
+	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		// TODO Auto-generated method stub
+		
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+		
 		switch (item.getItemId()) {
+		/*case android.R.id.home:
+			Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
+			return true;*/
 		case R.id.actionTambahData:
 			Intent i = new Intent(getApplicationContext(), KematianActivity.class);
 			startActivity(i);

@@ -6,6 +6,8 @@
     <string name="title_activity_kematian">KematianActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 	<string-array name="tempat_kematian">
 	    <item>Rumah Sakit</item>
 	    <item>Rumah Sendiri/keluarga</item>
